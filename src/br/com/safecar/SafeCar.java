@@ -1,6 +1,5 @@
 package br.com.safecar;
 
-import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,17 +34,27 @@ public class SafeCar {
 
     }
 
+    enum VacancyStatus {
+        FREE("Free"), OCCUPIED("Occupied");
+        public String label;
+
+        VacancyStatus(String label) {
+            this.label = label;
+        }
+    }
+
     private static final HourPrice NORMAL_PRICE = new HourPrice(4.0, 2.0);
     private static final Map<Integer, HourPrice> DYNAMIC_PRICES = new HashMap<>();
     private static final Map<Integer, Vehicle> VACANCIES = new HashMap<>();
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         populateDynamicTable();
         populateVacancies(10);
         do {
             System.out.println("\n\n\n\n");
             Integer option = SafeCar.createMenu();
             selectOption(option);
+
             try {
                 System.in.read();
             } catch (Exception e) {
@@ -78,8 +87,10 @@ public class SafeCar {
                 showAllVacancies();
                 break;
             case 2:
+                showVacanciesByStatus(VacancyStatus.FREE);
                 break;
             case 3:
+                showVacanciesByStatus(VacancyStatus.OCCUPIED);
                 break;
             case 4:
                 break;
@@ -133,4 +144,25 @@ public class SafeCar {
 
     }
 
+    private static void showVacanciesByStatus(VacancyStatus status) {
+        System.out.printf("%s Vacancies\n", status.label);
+        for (int vacancy : VACANCIES.keySet()) {
+            Vehicle vehicle = VACANCIES.get(vacancy);
+            switch (status) {
+                case OCCUPIED:
+                    if (vehicle != null) {
+                        System.out.print(MessageFormat.format("{0} \t\t\t", vacancy));
+                    }
+                    break;
+                case FREE:
+                    if (vehicle == null) {
+                        System.out.print(MessageFormat.format("{0} \t\t\t", vacancy));
+                    }
+                    break;
+
+            }
+        }
+    }
 }
+
+
