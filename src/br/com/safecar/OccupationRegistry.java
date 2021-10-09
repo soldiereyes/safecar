@@ -1,5 +1,6 @@
 package br.com.safecar;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalTime;
 
@@ -8,6 +9,8 @@ public class OccupationRegistry {
     private LocalTime arrival;
     private LocalTime departure;
     private Integer vacancy;
+    private BigDecimal chargedValue;
+
 
     public OccupationRegistry(Vehicle vehicle, Integer vacancy) {
         this.vehicle = vehicle;
@@ -15,13 +18,13 @@ public class OccupationRegistry {
         this.arrival = LocalTime.now();
 
     }
-    public Duration getOccupationTime(){
-         return Duration.between(arrival, LocalTime.now());
+
+    public Duration getOccupationTime() {
+        return Duration.between(arrival, LocalTime.now());
     }
 
     public void leave() {
         this.departure = LocalTime.now();
-
     }
 
     public Vehicle getVehicle() {
@@ -54,6 +57,14 @@ public class OccupationRegistry {
 
     public void setVacancy(Integer vacancy) {
         this.vacancy = vacancy;
+    }
+
+    public BigDecimal getChargedValue() {
+        return chargedValue;
+    }
+
+    public void setChargedValue(BigDecimal chargedValue) {
+        this.chargedValue = chargedValue;
     }
 }
 
