@@ -126,10 +126,10 @@ public class SafeCar {
 
 
     private static void showPriceTable() {
-        System.out.println("Hour\t Car Price\t\t Motorcycle Price");
+        System.out.println("Hour\t\t Car Price\t\t\t Motorcycle Price");
         for (int hour = 7; hour <= 18; hour++) {
             HourPrice hourPrice = DYNAMIC_PRICES.getOrDefault(hour, NORMAL_PRICE);
-            System.out.println(MessageFormat.format("{0} \t\t\t {1}\t\t\t\t {2}", hour, hourPrice.getCar(), hourPrice.getMotorcycle()));
+            System.out.println(MessageFormat.format("{0} \t\t\t {1}\t\t\t\t {2}",+ hour,  "R$ "+ hourPrice.getCar(), "R$ " + hourPrice.getMotorcycle()));
         }
     }
 
