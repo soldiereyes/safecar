@@ -302,6 +302,12 @@ public class SafeCar {
          *  Qualquer dúvida só olhar o método releaseVacancy.
          *
          */
+        BigDecimal revenues = new BigDecimal(0);
+        for (OccupationRegistry registry : OCCUPATION_REGISTRIES){
+            revenues = revenues.add(registry.getChargedValue());
+        }
+        System.out.println("Total Collected: R$ " + revenues.setScale(2, RoundingMode.HALF_UP) );
+
     }
 
 
@@ -352,6 +358,7 @@ public class SafeCar {
                     .plusSeconds(rnd.nextInt(60));
 
             o.setDeparture(departure);
+            o.setChargedValue(new BigDecimal(rnd.nextInt(80)));
 
             OCCUPATION_REGISTRIES.add(o);
         }
