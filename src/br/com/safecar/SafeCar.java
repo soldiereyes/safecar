@@ -197,7 +197,7 @@ public class SafeCar {
 
                 }
             }
-            if (occupation != null) {
+            if (occupation != null && status == VacancyStatus.OCCUPIED) {
                 Duration diff = occupation.getOccupationTime();
                 System.out.println("\t\t" + String.format("%d:%02d:%02d", diff.toHours(), (diff.toMinutes()) % 60, (diff.getSeconds() % 60)));
             } else {
